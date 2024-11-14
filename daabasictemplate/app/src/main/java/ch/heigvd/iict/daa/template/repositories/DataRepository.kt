@@ -2,8 +2,8 @@ import androidx.lifecycle.LiveData
 import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.NoteAndSchedule
 import ch.heigvd.iict.daa.labo4.models.Schedule
-import ch.heigvd.iict.daa.template.Dao.NoteDao
-import ch.heigvd.iict.daa.template.Dao.ScheduleDao
+import ch.heigvd.iict.daa.template.dao.NoteDao
+import ch.heigvd.iict.daa.template.dao.ScheduleDao
 
 class DataRepository(private val noteDao: NoteDao, private val scheduleDao: ScheduleDao) {
 

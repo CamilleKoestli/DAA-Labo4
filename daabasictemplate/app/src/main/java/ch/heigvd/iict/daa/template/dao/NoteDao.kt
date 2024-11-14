@@ -1,4 +1,4 @@
-package ch.heigvd.iict.daa.template.Dao
+package ch.heigvd.iict.daa.template.dao
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
