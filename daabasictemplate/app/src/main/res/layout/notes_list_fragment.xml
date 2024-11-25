@@ -12,7 +12,7 @@
 
     <!-- RecyclerView to display the list of notes -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/notes_recycler_view"
+        android:id="@+id/recycler"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scrollbars="vertical" />

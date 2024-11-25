@@ -13,6 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:name="ch.heigvd.iict.daa.template.FragmentNotes"
-        tools:layout="@layout/notes_fragment" />
+        tools:layout="@layout/notes_list_fragment" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

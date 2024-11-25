@@ -1,7 +1,10 @@
 package ch.heigvd.iict.daa.template
 
+import NotesAdapter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -16,40 +19,4 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
-
-    // CHECK FUNCTIONS BELOW
-    /*
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu defined in res/menu/main_menu.xml
-        menuInflater.inflate(R.menu.main_menu, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Handle menu actions based on the item selected
-        return when (item.itemId) {
-            R.id.menu_sort_by_creation_date -> {
-                // Action to sort notes by creation date
-                // TODO: Implement sorting by creation date here
-                true
-            }
-            R.id.menu_sort_by_schedule_date -> {
-                // Action to sort notes by scheduled date
-                // TODO: Implement sorting by scheduled date here
-                true
-            }
-            R.id.menu_generate_note -> {
-                // Action to generate a random note
-                // TODO: Implement note generation logic here
-                true
-            }
-            R.id.menu_delete_all_notes -> {
-                // Action to delete all notes
-                // TODO: Implement logic to delete all notes here
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-     */
 }
