@@ -5,17 +5,13 @@ import ch.heigvd.iict.daa.labo4.models.Schedule
 import ch.heigvd.iict.daa.template.dao.NoteDao
 import ch.heigvd.iict.daa.template.dao.ScheduleDao
 
-class DataRepository(private val noteDao: NoteDao, private val scheduleDao: ScheduleDao) {
+class DataRepository(private val noteDao: NoteDao) {
 
     val allNotes: LiveData<List<NoteAndSchedule>> = noteDao.getAllNotes()
     val countNotes: LiveData<Int> = noteDao.countNotes()
 
     suspend fun insert(note: Note) {
         noteDao.insert(note)
-    }
-
-    suspend fun insert(schedule: Schedule) {
-        scheduleDao.insert(schedule)
     }
 
     suspend fun delete(note: Note) {
