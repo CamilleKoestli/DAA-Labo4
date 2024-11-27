@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentContainerView
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,7 +18,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Charge le fragment initial si aucun état sauvegardé
-        if (savedInstanceState == null) {
+        if (savedInstanceState == null && findViewById<FragmentContainerView>(R.id.fragment_container_view) != null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, FragmentNotes())
                 .commit()
