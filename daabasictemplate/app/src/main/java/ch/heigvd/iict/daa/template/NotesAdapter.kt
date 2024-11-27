@@ -1,3 +1,10 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier contient l'implémentation de l'adaptateur pour la RecyclerView affichant les notes.
+ * L'Adapter gère les données sous forme de deux types distincts (Note simple et Note avec planification),
+ * met à jour la liste via DiffUtil et affiche des informations telles que le titre, le texte, et les délais relatifs.
+ */
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup

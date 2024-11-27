@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit le fragment FragmentControls, qui fournit des contrôles utilisateur pour
+ * gérer les notes. Les actions incluent la génération de nouvelles notes, la suppression de toutes les notes,
+ * et l'affichage en temps réel du nombre de notes via un compteur. Il utilise le modèle MVVM pour interagir
+ * avec le ViewModel.
+ */
+
 package ch.heigvd.iict.daa.template
 
 import DataRepository

@@ -1,3 +1,9 @@
+/**
+ * Auteur :  Koestli Camille / Oliveira Vitoria
+ * Desctription : Ce fichier définit la base de données Room utilisée pour stocker
+ * de manière persistante les notes et leurs planifications.
+ *
+ */
 package ch.heigvd.iict.daa.template
 
 import android.content.Context

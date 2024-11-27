@@ -1,3 +1,10 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit le fragment FragmentNotes, responsable de l'affichage des notes dans une liste
+ * via RecyclerView. Il utilise le modèle MVVM pour observer les données depuis un ViewModel et permet
+ * des actions comme le tri, la génération ou la suppression de notes.
+ */
+
 package ch.heigvd.iict.daa.template
 
 import DataRepository

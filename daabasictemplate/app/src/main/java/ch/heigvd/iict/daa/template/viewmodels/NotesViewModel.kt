@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit le ViewModel NotesViewModel, qui agit comme intermédiaire entre
+ * l'interface utilisateur et les données. Il expose des méthodes pour gérer les notes, telles que
+ * le tri, la génération, et la suppression. Une fabrique NotesViewModelFactory est également définie
+ * pour faciliter l'instanciation du ViewModel avec des dépendances spécifiques.
+ */
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

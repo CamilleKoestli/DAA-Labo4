@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit la classe `Note`, qui représente une note persistante
+ * dans la base de données Room. Chaque note inclut un état, un titre, un texte, une date
+ * de création et un type. Il propose également des méthodes pour générer des notes
+ * et des plannings aléatoires.
+ */
+
 package ch.heigvd.iict.daa.labo4.models
 
 import androidx.room.Entity

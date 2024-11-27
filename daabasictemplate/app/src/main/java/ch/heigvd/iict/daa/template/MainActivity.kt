@@ -1,3 +1,10 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit la classe MainActivity, qui agit comme un conteneur principal de l'application.
+ * Elle gère les fragments (Notes et Contrôles), configure les menus pour les actions globales (tri, suppression, génération),
+ * et adapte l'affichage en fonction du type d'appareil (téléphone ou tablette).
+ */
+
 package ch.heigvd.iict.daa.template
 
 import android.os.Bundle

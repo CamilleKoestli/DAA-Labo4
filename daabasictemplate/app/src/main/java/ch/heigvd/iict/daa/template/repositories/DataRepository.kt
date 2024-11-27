@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit le DataRepository, une couche intermédiaire entre les DAO de la
+ * base de données Room et le ViewModel. Il fournit des méthodes pour gérer les opérations CRUD sur
+ * les notes et leurs plannings, telles que l'insertion, la suppression, et le tri. Le repository utilise
+ * également une coroutine pour générer et insérer des notes aléatoires.
+ */
+
 import androidx.lifecycle.LiveData
 import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.NoteAndSchedule
@@ -10,38 +18,33 @@ class DataRepository(private val noteDao: NoteDao, private val applicationScope:
     var allNotes: LiveData<List<NoteAndSchedule>> = noteDao.getAllNotes()
     var notesCounter: LiveData<Int> = noteDao.countNotes()
 
-    // Méthode pour insérer une note
     suspend fun insert(note: Note) {
         noteDao.insert(note)
     }
 
-    // Méthode pour supprimer une note
     suspend fun delete(note: Note) {
         noteDao.delete(note)
     }
 
-    // Méthode pour supprimer toutes les notes
     suspend fun deleteAllNotes() {
         noteDao.deleteAllNotes()
     }
 
-    // Méthode pour générer une note aléatoire et l'insérer dans la base
+    // pour générer une note aléatoire et la mettre dans la DB
     suspend fun generateRandomNote() {
         val note = Note.generateRandomNote()
         val schedule = Note.generateRandomSchedule()
-        val id = noteDao.insert(note) // Assurez-vous que noteDao est bien initialisé dans DataRepository
+        val id = noteDao.insert(note)
         schedule?.let {
             it.ownerId = id
             noteDao.insert(it)
         }
     }
 
-    // Méthode pour trier les notes par date de création
     fun sortByCreationDate() {
         allNotes = noteDao.getAllNotesSortedByCreationDate()
     }
 
-    // Méthode pour trier les notes par date prévue
     fun sortByScheduleDate() {
         allNotes = noteDao.getAllNotesSortedByScheduleDate()
     }

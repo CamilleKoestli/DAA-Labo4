@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier contient la classe `Converters`, qui définit des convertisseurs
+ * (`TypeConverter`) pour permettre à Room de gérer des types complexes tels que `Calendar`
+ * et `Type`. Ces convertisseurs transforment ces types en formats simples comme `Long` ou `String`
+ * pour le stockage, et permettent leur reconversion lors de la récupération.
+ */
+
 package ch.heigvd.iict.daa.template.converters
 import androidx.room.TypeConverter
 import ch.heigvd.iict.daa.labo4.models.Type

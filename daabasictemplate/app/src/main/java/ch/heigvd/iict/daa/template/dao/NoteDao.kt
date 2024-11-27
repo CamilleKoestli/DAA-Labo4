@@ -1,3 +1,11 @@
+/**
+ * Auteur : Koestli Camille / Oliveira Vitoria
+ * Description : Ce fichier définit l'interface `NoteDao`, qui fournit des méthodes d'accès
+ * aux données pour manipuler les notes (`Note`) et leurs relations avec les plannings
+ * (`Schedule`) dans la base de données Room. Les méthodes incluent des requêtes pour
+ * récupérer, trier et compter les notes, ainsi que pour insérer ou supprimer des éléments.
+ */
+
 package ch.heigvd.iict.daa.template.dao
 
 import androidx.lifecycle.LiveData
