@@ -40,7 +40,13 @@ class FragmentNotes : Fragment() {
 
         // Observe the LiveData from the ViewModel
         viewModel.allNotes.observe(viewLifecycleOwner) { notes ->
-            adapter.noteItems = notes.map { NoteItem.SimpleNote(it.note) }
+            adapter.noteItems = notes.map { noteAndSchedule ->
+                if (noteAndSchedule.schedule == null) {
+                    NoteItem.SimpleNote(noteAndSchedule.note)
+                } else {
+                    NoteItem.NoteAndSchedule(noteAndSchedule)
+                }
+            }
         }
     }
 }

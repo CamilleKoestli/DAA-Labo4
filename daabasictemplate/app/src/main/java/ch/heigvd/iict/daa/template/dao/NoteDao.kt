@@ -9,6 +9,7 @@ import androidx.room.Query
 import androidx.room.Transaction
 import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.NoteAndSchedule
+import ch.heigvd.iict.daa.labo4.models.Schedule
 
 @Dao
 interface NoteDao {

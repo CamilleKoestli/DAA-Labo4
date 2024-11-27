@@ -7,7 +7,7 @@ import java.util.*
 
 @Entity
 data class Note(
-    @PrimaryKey(autoGenerate = true) var noteId : Long?,
+    @PrimaryKey(autoGenerate = true) var noteId : Long? = null,
     var state : State,
     var title : String,
     var text : String,

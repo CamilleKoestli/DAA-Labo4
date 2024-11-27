@@ -68,8 +68,6 @@ class NotesAdapter(
         private val noteTypeIcon: ImageView = view.findViewById(R.id.note_type_icon)
         private val noteTitle: TextView = view.findViewById(R.id.note_title)
         private val noteText: TextView = view.findViewById(R.id.note_text)
-        private val noteStateIcon: ImageView = view.findViewById(R.id.note_state_icon)
-        private val noteStateText: TextView = view.findViewById(R.id.note_state_text)
 
         fun bind(noteItem: NoteItem.SimpleNote) {
             val note = noteItem.note
@@ -85,7 +83,6 @@ class NotesAdapter(
                 Type.NONE -> R.drawable.note
             }
             noteTypeIcon.setImageResource(typeIcon)
-            noteStateIcon.setImageResource(R.drawable.clock)
 
             // Set state icon and text   todo
             /*val stateIconRes = if (note.state.name == "IN_PROGRESS") {
@@ -93,7 +90,6 @@ class NotesAdapter(
             } else {
                 R.drawable.ic_done
             }*/
-            noteStateText.text = note.state.name
         }
     }
 

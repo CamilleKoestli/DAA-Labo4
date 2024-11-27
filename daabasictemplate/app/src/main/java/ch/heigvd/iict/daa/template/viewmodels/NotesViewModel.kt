@@ -10,6 +10,8 @@ class NotesViewModel(private val repository: DataRepository) : ViewModel() {
     val allNotes: LiveData<List<NoteAndSchedule>> = repository.allNotes
     val countNotes: LiveData<Int> = repository.countNotes
 
+    // todo sort notes
+
     fun generateANote() {
         viewModelScope.launch {
             repository.generateRandomNote()
