@@ -1,37 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal"
     android:padding="8dp">
 
-    <!-- ImageView for the drawable -->
-    <!-- No drawable by default, set by adapter -->
+    <!-- Image for Note -->
     <ImageView
         android:id="@+id/note_type_icon"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginEnd="8dp"
-        android:contentDescription="Note icon"/>
+        android:contentDescription="@string/noteImageDescription"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/note_title" />
 
-    <LinearLayout
+    <!-- Note Title -->
+    <TextView
+        android:id="@+id/note_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Note Title"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/note_type_icon"
+        app:layout_constraintEnd_toStartOf="@+id/scheduleClockImage" />
+
+    <!-- Note Text -->
+    <TextView
+        android:id="@+id/note_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Note Text"
+        app:layout_constraintTop_toBottomOf="@id/note_title"
+        app:layout_constraintStart_toEndOf="@id/note_type_icon"
+        app:layout_constraintEnd_toStartOf="@+id/scheduleClockImage" />
+
+    <!-- Schedule Clock Icon -->
+    <ImageView
+        android:id="@+id/scheduleClockImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:src="@drawable/clock"
+        android:contentDescription="@string/clockImageDescription"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp" />
 
-        <TextView
-            android:id="@+id/note_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Note Title"
-            android:textSize="16sp"
-            android:textStyle="bold" />
+    <!-- Schedule Months -->
+    <TextView
+        android:id="@+id/scheduleMonths"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Months"
+        app:layout_constraintTop_toBottomOf="@id/scheduleClockImage"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="8dp" />
 
-        <TextView
-            android:id="@+id/note_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Note Text" />
-    </LinearLayout>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
