@@ -25,15 +25,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.notes_menu, menu)
+        menuInflater.inflate(R.menu.main_menu, menu)
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        // Récupère le fragment actif
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as? FragmentNotes
-
-        // Gère les actions du menu
         return when (item.itemId) {
             R.id.main_menu_deleteAll -> {
                 fragment?.deleteAllNotes()
@@ -44,11 +41,11 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.main_menu_eta -> {
-                fragment?.sortNotesByScheduleDate() // Correction de l'appel à la méthode
+                fragment?.sortNotesByScheduleDate()
                 true
             }
             R.id.main_menu_creation -> {
-                fragment?.sortNotesByCreationDate() // Correction de l'appel à la méthode
+                fragment?.sortNotesByCreationDate()
                 true
             }
             else -> super.onOptionsItemSelected(item)

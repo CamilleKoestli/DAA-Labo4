@@ -5,7 +5,7 @@
         android:id="@+id/sub_main_menu"
         android:icon="@drawable/sort"
         android:title="@string/sort"
-        app:showAsAction="ifRoom">
+        app:showAsAction="always">
         <menu>
             <item
                 android:id="@+id/main_menu_creation"
