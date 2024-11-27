@@ -9,7 +9,6 @@ import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.Type
 import ch.heigvd.iict.daa.template.R
 import java.util.Calendar
-import java.util.Locale
 import java.util.concurrent.TimeUnit
 
 sealed class NoteItem {
@@ -47,8 +46,8 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
         private val noteTypeIcon: ImageView = view.findViewById(R.id.note_type_icon)
         private val noteTitle: TextView = view.findViewById(R.id.note_title)
         private val noteText: TextView = view.findViewById(R.id.note_text)
-        private val scheduleClockImage: ImageView = view.findViewById(R.id.scheduleClockImage)
-        private val scheduleMonths: TextView = view.findViewById(R.id.scheduleMonths)
+        private val scheduleClockImage: ImageView = view.findViewById(R.id.note_state_icon)
+        private val scheduleMonths: TextView = view.findViewById(R.id.note_state_text)
 
         fun bind(noteItem: NoteItem) {
             when (noteItem) {

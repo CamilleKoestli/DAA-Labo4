@@ -27,7 +27,7 @@
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@id/note_type_icon"
-        app:layout_constraintEnd_toStartOf="@+id/scheduleClockImage" />
+        app:layout_constraintEnd_toStartOf="@+id/note_state_icon" />
 
     <!-- Note Text -->
     <TextView
@@ -37,11 +37,11 @@
         android:text="Note Text"
         app:layout_constraintTop_toBottomOf="@id/note_title"
         app:layout_constraintStart_toEndOf="@id/note_type_icon"
-        app:layout_constraintEnd_toStartOf="@+id/scheduleClockImage" />
+        app:layout_constraintEnd_toStartOf="@+id/note_state_icon" />
 
     <!-- Schedule Clock Icon -->
     <ImageView
-        android:id="@+id/scheduleClockImage"
+        android:id="@+id/note_state_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:src="@drawable/clock"
@@ -52,11 +52,11 @@
 
     <!-- Schedule Months -->
     <TextView
-        android:id="@+id/scheduleMonths"
+        android:id="@+id/note_state_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Months"
-        app:layout_constraintTop_toBottomOf="@id/scheduleClockImage"
+        app:layout_constraintTop_toBottomOf="@id/note_state_icon"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginEnd="8dp" />
 

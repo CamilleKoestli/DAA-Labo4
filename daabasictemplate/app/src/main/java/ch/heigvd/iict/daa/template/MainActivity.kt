@@ -18,11 +18,22 @@ class MainActivity : AppCompatActivity() {
         }
 
         // Charge le fragment initial si aucun état sauvegardé
-        if (savedInstanceState == null && findViewById<FragmentContainerView>(R.id.fragment_container_view) != null) {
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.fragment_container_view, FragmentNotes())
-                .commit()
+        if (savedInstanceState == null) {
+            if(findViewById<FragmentContainerView>(R.id.fragment_container_view) != null) {
+                // Téléphone
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragment_container_view, FragmentNotes())
+                    .commit()
+            } else {
+                // Tablette
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.container_notes, FragmentNotes())
+                    .replace(R.id.container_controls, FragmentControls())
+                    .commit()
+            }
         }
+
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
