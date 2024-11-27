@@ -8,9 +8,19 @@ import kotlinx.coroutines.launch
 class NotesViewModel(private val repository: DataRepository) : ViewModel() {
 
     val allNotes: LiveData<List<NoteAndSchedule>> = repository.allNotes
-    val countNotes: LiveData<Int> = repository.countNotes
+    val notesCounter: LiveData<Int> = repository.notesCounter
 
-    // todo sort notes
+    fun sortNotesByCreationDate() {
+        viewModelScope.launch {
+            repository.sortByCreationDate()
+        }
+    }
+
+    fun sortNotesByScheduleDate() {
+        viewModelScope.launch {
+            repository.sortByScheduleDate()
+        }
+    }
 
     fun generateANote() {
         viewModelScope.launch {

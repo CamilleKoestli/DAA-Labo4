@@ -1,4 +1,12 @@
 <resources>
-    <string name="app_name">template</string>
+    <string name="app_name">Labo 4</string>
     <string name="welcome">Welcome to DAA!</string>
+    <string name="notes_list_title">My notes</string>
+    <string name="generate_note">Generate Note</string>
+    <string name="delete_all_notes">Delete All Notes</string>
+    <string name="sort">Sort</string>
+    <string name="delete_action">Delete All</string>
+    <string name="generate_action">Generate</string>
+    <string name="sort_by_schedule_date">ETA</string>
+    <string name="sort_by_creation_date">Creation Date\n</string>
 </resources>

@@ -18,6 +18,26 @@ interface NoteDao {
     @Query("SELECT * FROM note")
     fun getAllNotes(): LiveData<List<NoteAndSchedule>>
 
+    @Transaction
+    @Query("""
+        SELECT * 
+        FROM note 
+        LEFT JOIN schedule 
+        ON note.noteId = schedule.ownerId 
+        ORDER BY schedule.date ASC
+    """)
+    fun getAllNotesSortedByScheduleDate(): LiveData<List<NoteAndSchedule>>
+
+    @Transaction
+    @Query("""
+        SELECT * 
+        FROM note 
+        LEFT JOIN schedule 
+        ON note.noteId = schedule.ownerId 
+        ORDER BY note.creationDate ASC
+    """)
+    fun getAllNotesSortedByCreationDate(): LiveData<List<NoteAndSchedule>>
+
     @Query("SELECT COUNT(*) FROM note")
     fun countNotes(): LiveData<Int>
 
@@ -29,4 +49,5 @@ interface NoteDao {
 
     @Query("DELETE FROM Note")
     suspend fun deleteAllNotes()
+
 }

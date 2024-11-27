@@ -1,17 +1,9 @@
 package ch.heigvd.iict.daa.template
 
-import DataRepository
-import NotesAdapter
-import NotesViewModel
-import NotesViewModelFactory
 import android.os.Bundle
+import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.fragment.app.viewModels
-import androidx.fragment.app.Fragment
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,10 +17,38 @@ class MainActivity : AppCompatActivity() {
                 .replace(R.id.fragment_container_view, FragmentNotes())
                 .commit()
         }
-
         // todo add actionbar
 
     }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.notes_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as? FragmentNotes
+        return when (item.itemId) {
+            R.id.sort_creation_date_action -> {
+                fragment?.sortNotesByCreationDate()
+                true
+            }
+            R.id.sort_schedule_date_action -> {
+                fragment?.sortNotesByScheduleDate()
+                true
+            }
+            R.id.generate_note_action -> {
+                fragment?.generateRandomNote()
+                true
+            }
+            R.id.delete_all_notes_action -> {
+                fragment?.deleteAllNotes()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     // todo complete
     /*

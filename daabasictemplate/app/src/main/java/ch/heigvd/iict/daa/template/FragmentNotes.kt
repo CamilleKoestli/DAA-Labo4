@@ -49,4 +49,20 @@ class FragmentNotes : Fragment() {
             }
         }
     }
+
+    fun sortNotesByCreationDate() {
+        viewModel.sortNotesByCreationDate()
+    }
+
+    fun sortNotesByScheduleDate() {
+        viewModel.sortNotesByScheduleDate()
+    }
+
+    fun generateRandomNote() {
+        viewModel.generateANote()
+    }
+
+    fun deleteAllNotes() {
+        viewModel.deleteAllNotes()
+    }
 }

@@ -1,14 +1,12 @@
 import androidx.lifecycle.LiveData
 import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.NoteAndSchedule
-import ch.heigvd.iict.daa.labo4.models.Schedule
 import ch.heigvd.iict.daa.template.dao.NoteDao
-import ch.heigvd.iict.daa.template.dao.ScheduleDao
 
 class DataRepository(private val noteDao: NoteDao) {
 
-    val allNotes: LiveData<List<NoteAndSchedule>> = noteDao.getAllNotes()
-    val countNotes: LiveData<Int> = noteDao.countNotes()
+    var allNotes: LiveData<List<NoteAndSchedule>> = noteDao.getAllNotes()
+    var notesCounter: LiveData<Int> = noteDao.countNotes()
 
     suspend fun insert(note: Note) {
         noteDao.insert(note)
@@ -27,4 +25,13 @@ class DataRepository(private val noteDao: NoteDao) {
         val randomNote = Note.generateRandomNote()
         noteDao.insert(randomNote)
     }
+
+    fun sortByCreationDate() {
+        allNotes = noteDao.getAllNotesSortedByCreationDate()
+    }
+
+    fun sortByScheduleDate() {
+        allNotes = noteDao.getAllNotesSortedByScheduleDate()
+    }
+
 }
