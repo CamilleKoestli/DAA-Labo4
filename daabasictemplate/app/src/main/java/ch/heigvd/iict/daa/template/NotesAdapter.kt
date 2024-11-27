@@ -14,9 +14,7 @@ sealed class NoteItem {
     data class NoteAndSchedule(val noteAndSchedule: ch.heigvd.iict.daa.labo4.models.NoteAndSchedule) : NoteItem()
 }
 
-class NotesAdapter(
-    private val _noteItems: List<NoteItem>
-) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapter<NotesAdapter.NoteViewHolder>() {
 
     var noteItems = listOf<NoteItem>()
         set(value) {
@@ -26,106 +24,66 @@ class NotesAdapter(
             diffResult.dispatchUpdatesTo(this)
         }
 
-    init { noteItems = _noteItems }
-
-    override fun getItemCount()= noteItems.size
-
-    // Constants to represent the view types
-    companion object {
-        private const val NOTE = 0
-        private const val NOTE_WITH_SCHEDULE = 1
+    init {
+        noteItems = _noteItems
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            NOTE -> NoteViewHolder(
-                LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
-            )
+    override fun getItemCount() = noteItems.size
 
-            else -> NoteAndScheduleViewHolder(
-                LayoutInflater.from(parent.context)
-                    .inflate(R.layout.note_item, parent, false)
-            )
-        }
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NoteViewHolder {
+        // Inflate the simplified layout for all items
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.note_item, parent, false)
+        return NoteViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is NoteViewHolder -> holder.bind(noteItems[position] as NoteItem.SimpleNote)
-            is NoteAndScheduleViewHolder -> holder.bind(noteItems[position] as NoteItem.NoteAndSchedule)
-        }
+    override fun onBindViewHolder(holder: NoteViewHolder, position: Int) {
+        holder.bind(noteItems[position])
     }
 
-
-    /*project uses two distinct layouts (note_item and note_with_schedule_item), which means:
-
-    SimpleNote and NoteAndSchedule cannot share a single ViewHolder.
-    Each layout must have its own ViewHolder because the views (note_schedule_date, for example) are not shared.*/
-
-
-    // ViewHolder for SimpleNote
     inner class NoteViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         private val noteTypeIcon: ImageView = view.findViewById(R.id.note_type_icon)
         private val noteTitle: TextView = view.findViewById(R.id.note_title)
         private val noteText: TextView = view.findViewById(R.id.note_text)
 
-        fun bind(noteItem: NoteItem.SimpleNote) {
-            val note = noteItem.note
-            noteTitle.text = note.title
-            noteText.text = note.text
+        fun bind(noteItem: NoteItem) {
+            when (noteItem) {
+                is NoteItem.SimpleNote -> {
+                    val note = noteItem.note
+                    noteTitle.text = note.title
+                    noteText.text = note.text
 
-            // Set icon based on type
-            val typeIcon = when (note.type) {
-                Type.TODO -> R.drawable.todo
-                Type.SHOPPING -> R.drawable.shopping
-                Type.WORK -> R.drawable.work
-                Type.FAMILY -> R.drawable.family
-                Type.NONE -> R.drawable.note
+                    // Set icon based on type
+                    val typeIcon = when (note.type) {
+                        Type.TODO -> R.drawable.todo
+                        Type.SHOPPING -> R.drawable.shopping
+                        Type.WORK -> R.drawable.work
+                        Type.FAMILY -> R.drawable.family
+                        Type.NONE -> R.drawable.note
+                    }
+                    noteTypeIcon.setImageResource(typeIcon)
+                }
+
+                is NoteItem.NoteAndSchedule -> {
+                    val note = noteItem.noteAndSchedule.note
+                    noteTitle.text = note.title
+                    noteText.text = note.text
+
+                    // Set icon based on type
+                    val typeIcon = when (note.type) {
+                        Type.TODO -> R.drawable.todo
+                        Type.SHOPPING -> R.drawable.shopping
+                        Type.WORK -> R.drawable.work
+                        Type.FAMILY -> R.drawable.family
+                        Type.NONE -> R.drawable.note
+                    }
+                    noteTypeIcon.setImageResource(typeIcon)
+                }
+
+                else -> {}
             }
-            noteTypeIcon.setImageResource(typeIcon)
-
-            // Set state icon and text   todo
-            /*val stateIconRes = if (note.state.name == "IN_PROGRESS") {
-                R.drawable.clock
-            } else {
-                R.drawable.ic_done
-            }*/
-        }
-    }
-
-    // ViewHolder for NoteAndSchedule
-    inner class NoteAndScheduleViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        private val noteTypeIcon: ImageView = view.findViewById(R.id.note_type_icon)
-        private val noteTitle: TextView = view.findViewById(R.id.note_title)
-        private val noteText: TextView = view.findViewById(R.id.note_text)
-        private val noteStateIcon: ImageView = view.findViewById(R.id.note_state_icon)
-        private val noteStateText: TextView = view.findViewById(R.id.note_state_text)
-        private val noteScheduleDate: TextView = view.findViewById(R.id.note_state_text)
-
-        fun bind(noteItem: NoteItem.NoteAndSchedule) {
-            val noteAndSchedule = noteItem.noteAndSchedule
-            val note = noteAndSchedule.note
-            noteTitle.text = note.title
-            noteText.text = note.text
-
-            // Set icon based on type
-            val typeIcon = when (note.type) {
-                Type.TODO -> R.drawable.todo
-                Type.SHOPPING -> R.drawable.shopping
-                Type.WORK -> R.drawable.work
-                Type.FAMILY -> R.drawable.family
-                Type.NONE -> R.drawable.note
-            }
-            noteTypeIcon.setImageResource(typeIcon)
-            noteStateIcon.setImageResource(R.drawable.clock)
-            noteStateText.text = note.state.name
-
-            // Bind schedule-specific data
-            noteScheduleDate.text = noteAndSchedule.schedule?.date?.time.toString()
         }
     }
 }
-
 
 class NoteDiffCallback(private val oldList: List<NoteItem>, private val newList: List<NoteItem>) : DiffUtil.Callback() {
     override fun getOldListSize() = oldList.size
@@ -141,5 +99,3 @@ class NoteDiffCallback(private val oldList: List<NoteItem>, private val newList:
         return old::class == new::class
     }
 }
-
-

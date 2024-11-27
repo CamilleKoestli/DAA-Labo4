@@ -42,7 +42,10 @@ interface NoteDao {
     fun countNotes(): LiveData<Int>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(note: Note)
+    suspend fun insert(note: Note): Long
+
+    @Insert
+    suspend fun insert(schedule: Schedule)
 
     @Delete
     suspend fun delete(note: Note)

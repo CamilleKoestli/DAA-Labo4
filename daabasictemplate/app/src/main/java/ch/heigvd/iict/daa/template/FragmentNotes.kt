@@ -17,9 +17,9 @@ class FragmentNotes : Fragment() {
 
     private lateinit var adapter: NotesAdapter
     private val viewModel: NotesViewModel by viewModels {
-        val application = requireActivity().application
-        val database = (application as App).database
-        val repository = DataRepository(database.noteDao())
+        val application = requireActivity().application as App
+        val database = application.database
+        val repository = DataRepository(database.noteDao(), application.applicationScope)
         NotesViewModelFactory(repository)
     }
 
