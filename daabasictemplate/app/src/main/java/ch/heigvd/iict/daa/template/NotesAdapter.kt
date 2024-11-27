@@ -44,7 +44,7 @@ class NotesAdapter(
 
             else -> NoteAndScheduleViewHolder(
                 LayoutInflater.from(parent.context)
-                    .inflate(R.layout.note_and_schedule_item, parent, false)
+                    .inflate(R.layout.note_item, parent, false)
             )
         }
     }
