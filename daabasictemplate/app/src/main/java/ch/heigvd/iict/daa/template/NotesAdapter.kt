@@ -8,6 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import ch.heigvd.iict.daa.labo4.models.Note
 import ch.heigvd.iict.daa.labo4.models.Type
 import ch.heigvd.iict.daa.template.R
+import java.util.Calendar
+import java.util.Locale
 
 sealed class NoteItem {
     data class SimpleNote(val note: Note) : NoteItem()
@@ -44,6 +46,8 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
         private val noteTypeIcon: ImageView = view.findViewById(R.id.note_type_icon)
         private val noteTitle: TextView = view.findViewById(R.id.note_title)
         private val noteText: TextView = view.findViewById(R.id.note_text)
+        private val scheduleClockImage: ImageView = view.findViewById(R.id.scheduleClockImage)
+        private val scheduleMonths: TextView = view.findViewById(R.id.scheduleMonths)
 
         fun bind(noteItem: NoteItem) {
             when (noteItem) {
@@ -61,10 +65,15 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
                         Type.NONE -> R.drawable.note
                     }
                     noteTypeIcon.setImageResource(typeIcon)
-                }
 
+                    // No schedule available, hide the scheduleMonths
+                    scheduleMonths.visibility = View.GONE
+                    scheduleClockImage.visibility = View.GONE
+                }
                 is NoteItem.NoteAndSchedule -> {
                     val note = noteItem.noteAndSchedule.note
+                    val schedule = noteItem.noteAndSchedule.schedule
+
                     noteTitle.text = note.title
                     noteText.text = note.text
 
@@ -77,12 +86,26 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
                         Type.NONE -> R.drawable.note
                     }
                     noteTypeIcon.setImageResource(typeIcon)
+
+                    // Display the schedule date if available
+                    schedule?.let {
+                        val calendar = it.date
+                        val monthName = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
+                        scheduleMonths.text = monthName
+                        scheduleMonths.visibility = View.VISIBLE
+                        scheduleClockImage.visibility = View.VISIBLE
+                    } ?: run {
+                        // If no schedule, hide the scheduleMonths and clock image
+                        scheduleMonths.visibility = View.GONE
+                        scheduleClockImage.visibility = View.GONE
+                    }
                 }
 
                 else -> {}
             }
         }
     }
+
 }
 
 class NoteDiffCallback(private val oldList: List<NoteItem>, private val newList: List<NoteItem>) : DiffUtil.Callback() {

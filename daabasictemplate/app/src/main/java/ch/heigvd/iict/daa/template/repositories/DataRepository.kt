@@ -27,18 +27,12 @@ class DataRepository(private val noteDao: NoteDao, private val applicationScope:
 
     // Méthode pour générer une note aléatoire et l'insérer dans la base
     suspend fun generateRandomNote() {
-        applicationScope.launch {
-            val note = Note.generateRandomNote() // Génère une note aléatoire
-            val schedule = Note.generateRandomSchedule() // Génère un emploi du temps aléatoire (facultatif)
-
-            // Insère la note et récupère l'identifiant généré
-            val id = noteDao.insert(note)
-
-            // Si un emploi du temps est généré, insérez-le avec l'ID de la note
-            if (schedule != null) {
-                schedule.ownerId = id // Associe l'emploi du temps à la note
-                noteDao.insert(schedule) // Insère l'emploi du temps
-            }
+        val note = Note.generateRandomNote()
+        val schedule = Note.generateRandomSchedule()
+        val id = noteDao.insert(note) // Assurez-vous que noteDao est bien initialisé dans DataRepository
+        schedule?.let {
+            it.ownerId = id
+            noteDao.insert(it)
         }
     }
 
