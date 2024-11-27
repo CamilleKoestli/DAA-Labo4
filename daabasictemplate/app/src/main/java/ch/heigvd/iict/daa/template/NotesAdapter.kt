@@ -10,6 +10,7 @@ import ch.heigvd.iict.daa.labo4.models.Type
 import ch.heigvd.iict.daa.template.R
 import java.util.Calendar
 import java.util.Locale
+import java.util.concurrent.TimeUnit
 
 sealed class NoteItem {
     data class SimpleNote(val note: Note) : NoteItem()
@@ -87,11 +88,10 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
                     }
                     noteTypeIcon.setImageResource(typeIcon)
 
-                    // Display the schedule date if available
+                    // Display the relative schedule date if available
                     schedule?.let {
-                        val calendar = it.date
-                        val monthName = calendar.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.getDefault())
-                        scheduleMonths.text = monthName
+                        val relativeTime = calculateRelativeTime(it.date)
+                        scheduleMonths.text = relativeTime
                         scheduleMonths.visibility = View.VISIBLE
                         scheduleClockImage.visibility = View.VISIBLE
                     } ?: run {
@@ -102,6 +102,24 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
                 }
 
                 else -> {}
+            }
+        }
+
+        private fun calculateRelativeTime(scheduleDate: Calendar): String {
+            val currentTime = Calendar.getInstance().timeInMillis
+            val scheduleTime = scheduleDate.timeInMillis
+
+            val diffInMillis = scheduleTime - currentTime
+            val days = TimeUnit.MILLISECONDS.toDays(diffInMillis).toInt()
+            val months = days / 30
+            val weeks = days / 7
+
+            return when {
+                months > 0 -> "$months month${if (months > 1) "s" else ""}"
+                weeks > 0 -> "$weeks week${if (weeks > 1) "s" else ""}"
+                days > 0 -> "$days day${if (days > 1) "s" else ""}"
+                days == 0 -> "Today"
+                else -> "Overdue"
             }
         }
     }
