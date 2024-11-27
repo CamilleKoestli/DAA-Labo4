@@ -119,7 +119,7 @@ class NotesAdapter(private val _noteItems: List<NoteItem>) : RecyclerView.Adapte
                 weeks > 0 -> "$weeks week${if (weeks > 1) "s" else ""}"
                 days > 0 -> "$days day${if (days > 1) "s" else ""}"
                 days == 0 -> "Today"
-                else -> "Overdue"
+                else -> "Late"
             }
         }
     }
