@@ -1,12 +1,24 @@
 <resources>
     <string name="app_name">Labo 4</string>
     <string name="welcome">Welcome to DAA!</string>
+    <string name="generate">Generate</string>
     <string name="notes_list_title">My notes</string>
     <string name="generate_note">Generate Note</string>
-    <string name="delete_all_notes">Delete All Notes</string>
-    <string name="sort">Sort</string>
+    <string name="delete_all_notes">Delete All</string>
+    <string name="sort">TRIER</string>
     <string name="delete_action">Delete All</string>
     <string name="generate_action">Generate</string>
     <string name="sort_by_schedule_date">ETA</string>
     <string name="sort_by_creation_date">Creation Date\n</string>
+
+    <string name="btnGenerate">GENERATE</string>
+    <string name="btnDelete">DELETE</string>
+    <string name="notes">My notes</string>
+    <string name="months">%1$d Months</string>
+    <string name="weeks">%1$d Weeks</string>
+    <string name="days">%1$d Days</string>
+    <string name="late">Late</string>
+    <string name="today">Today</string>
+    <string name="noteImageDescription">Image of the type of task</string>
+    <string name="clockImageDescription">Image of a clock</string>
 </resources>

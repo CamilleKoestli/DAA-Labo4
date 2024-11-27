@@ -5,75 +5,53 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 
-
 class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        // Configure l'ActionBar
+        supportActionBar?.apply {
+            title = getString(R.string.app_name) // Titre de l'application
+        }
+
+        // Charge le fragment initial si aucun état sauvegardé
         if (savedInstanceState == null) {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container_view, FragmentNotes())
                 .commit()
         }
-        // todo add actionbar
-
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.notes_menu, menu)
-        return true
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Récupère le fragment actif
         val fragment = supportFragmentManager.findFragmentById(R.id.fragment_container_view) as? FragmentNotes
+
+        // Gère les actions du menu
         return when (item.itemId) {
-            R.id.sort_creation_date_action -> {
-                fragment?.sortNotesByCreationDate()
-                true
-            }
-            R.id.sort_schedule_date_action -> {
-                fragment?.sortNotesByScheduleDate()
-                true
-            }
-            R.id.generate_note_action -> {
-                fragment?.generateRandomNote()
-                true
-            }
-            R.id.delete_all_notes_action -> {
+            R.id.main_menu_deleteAll -> {
                 fragment?.deleteAllNotes()
                 true
             }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-
-    // todo complete
-    /*
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_sort_by_date -> {
-                // Call sorting logic (e.g., trigger a function in FragmentNotes)
+            R.id.main_menu_generate -> {
+                fragment?.generateRandomNote()
                 true
             }
-            R.id.action_sort_by_type -> {
-                // Call sorting logic (e.g., trigger a function in FragmentNotes)
+            R.id.main_menu_eta -> {
+                fragment?.sortNotesByScheduleDate() // Correction de l'appel à la méthode
                 true
             }
-            R.id.action_add_note -> {
-                // Generate a new random note and add it
-                addRandomNote()
-                true
-            }
-            R.id.action_delete_all -> {
-                // Delete all notes
-                deleteAllNotes()
+            R.id.main_menu_creation -> {
+                fragment?.sortNotesByCreationDate() // Correction de l'appel à la méthode
                 true
             }
             else -> super.onOptionsItemSelected(item)
         }
     }
-    */
 }
